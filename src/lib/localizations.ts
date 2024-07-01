@@ -6,9 +6,9 @@
  */
 
 import { createReadStream, promises as fs } from 'fs';
-import { createInterface } from 'readline';
-import * as path from 'path';
 import { EOL } from 'os';
+import * as path from 'path';
+import { createInterface } from 'readline';
 
 import { normalizeLocale } from './normalize-locale';
 
@@ -39,7 +39,7 @@ async function readStringsFromStream(
 ): Promise<Map<string, string>> {
   const res = new Map() as Map<string, string>;
   let nextLineIsComment = false;
-  stream.setEncoding('utf-16le');
+  stream.setEncoding('utf16le');
   const rl = createInterface(stream);
   for await (const line of rl) {
     // skip empty lines

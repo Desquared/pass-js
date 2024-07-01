@@ -18,6 +18,7 @@ function is0to255(num: number): boolean {
 function getRgb(colorString: string): [number, number, number] {
   // short paths
   const string = colorString.trim();
+  // @ts-ignore
   if (string in colorNames) return colorNames[string];
   if (/transparent/i.test(string)) return [0, 0, 0];
 
