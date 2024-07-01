@@ -2,8 +2,7 @@
   "name": "@walletpass/pass-js",
   "description": "Apple Wallet Pass generating and pushing updates from Node.js",
   "author": "Konstantin Vyatkin <tino@vtkn.io>",
-  "version": "6.9.8",
-  "homepage": "https://github.com/walletpass/pass-js",
+  "version": "6.9.10",
   "license": "MIT",
   "licenses": [
     {
@@ -11,10 +10,6 @@
       "url": "https://github.com/walletpass/pass-js/blob/master/MIT-LICENSE"
     }
   ],
-  "funding": {
-    "type": "opencollective",
-    "url": "https://opencollective.com/walletpass"
-  },
   "engines": {
     "node": ">=10.10"
   },
@@ -22,19 +17,15 @@
     "passkit-keys": "./bin/passkit-keys"
   },
   "files": [
-    "dist/*.js",
-    "dist/lib/*.js",
-    "dist/*.ts",
-    "dist/lib/*.ts",
-    "bin/passkit-keys"
+    "build"
   ],
-  "types": "./dist/index.d.ts",
-  "main": "./dist/index.js",
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
   "scripts": {
     "test": "node -r env-app-yaml/config --expose-gc node_modules/jest/bin/jest --detectOpenHandles --logHeapUsage --maxWorkers=1",
     "lint": "eslint \"{src,__tests__}/**/*.ts\" --ignore-pattern \"*test*\" --ignore-path .gitignore",
     "postversion": "git push origin master --follow-tags",
-    "prepublishOnly": "tsc",
+    "prepublish": "npm run build",
     "costs": "npx cost-of-modules --no-install",
     "build": "rm -rf build & tsc --project tsconfig.build.json"
   },
@@ -50,13 +41,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/walletpass/pass-js.git"
-  },
-  "bugs": {
-    "url": "https://github.com/walletpass/pass-js/issues"
-  },
-  "directories": {
-    "lib": "src",
-    "test": "__tests__"
   },
   "dependencies": {
     "buffer-crc32": "0.2.13",
