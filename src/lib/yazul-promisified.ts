@@ -1,7 +1,7 @@
 import { promisify } from 'util';
 
-import { Entry, Options, ZipFile, fromBuffer as ZipFromBuffer } from 'yauzl';
 import { EventIterator } from 'event-iterator';
+import { Entry, Options, ZipFile, fromBuffer as ZipFromBuffer } from 'yauzl';
 
 import { streamToBuffer } from './stream-to-buffer';
 
@@ -12,6 +12,7 @@ Object.defineProperties(ZipFile.prototype, {
     writable: false,
     configurable: false,
     value() {
+      //@ts-ignore
       return new EventIterator<Entry>((push, stop, fail) => {
         this.addListener('entry', push);
         this.addListener('end', stop);

@@ -5,13 +5,13 @@
  * @see {@link https://developer.apple.com/library/content/documentation/UserExperience/Reference/PassKit_Bundle/Chapters/LowerLevel.html#//apple_ref/doc/uid/TP40012026-CH3-SW3}
  */
 
+import { PASS_STYLES, STRUCTURE_FIELDS, TRANSIT } from '../constants';
 import {
   ApplePass,
+  PassCommonStructure,
   PassStyle,
   TransitType,
-  PassCommonStructure,
 } from '../interfaces';
-import { PASS_STYLES, TRANSIT, STRUCTURE_FIELDS } from '../constants';
 
 import { FieldsMap } from './fieldsMap';
 import { NFCField } from './nfc-fields';
@@ -31,6 +31,7 @@ export class PassStructure {
           // check NFC fields
           this.fields.nfc = new NFCField(fields.nfc);
         }
+        //@ts-ignore
         const structure: PassCommonStructure = fields[this.style];
         for (const prop of STRUCTURE_FIELDS) {
           if (prop in structure) {
@@ -59,9 +60,11 @@ export class PassStructure {
 
   set style(v: PassStyle | undefined) {
     // remove all other styles
+    //@ts-ignore
     for (const style of PASS_STYLES) if (style !== v) delete this.fields[style];
     if (!v) return;
     if (!PASS_STYLES.has(v)) throw new TypeError(`Invalid Pass type "${v}"`);
+    //@ts-ignore
     if (!(v in this.fields)) this.fields[v] = {};
     // Add NFC fields
     if ('storeCard' in this.fields) this.fields.nfc = new NFCField();
@@ -97,6 +100,7 @@ export class PassStructure {
       );
 
     if (!v) {
+      //@ts-ignore
       if (this.fields.boardingPass) delete this.fields.boardingPass.transitType;
     } else {
       if (Object.values(TRANSIT).includes(v)) {
@@ -129,8 +133,11 @@ export class PassStructure {
       throw new ReferenceError(
         `Pass style is undefined, set the pass style before accessing pass structure fields`,
       );
+    //@ts-ignore
     if (!(this.fields[style].headerFields instanceof FieldsMap))
+      //@ts-ignore
       this.fields[style].headerFields = new FieldsMap();
+    //@ts-ignore
     return this.fields[style].headerFields;
   }
   get auxiliaryFields(): FieldsMap {
@@ -139,8 +146,11 @@ export class PassStructure {
       throw new ReferenceError(
         `Pass style is undefined, set the pass style before accessing pass structure fields`,
       );
+    //@ts-ignore
     if (!(this.fields[style].auxiliaryFields instanceof FieldsMap))
+      //@ts-ignore
       this.fields[style].auxiliaryFields = new FieldsMap();
+    //@ts-ignore
     return this.fields[style].auxiliaryFields;
   }
   get backFields(): FieldsMap {
@@ -149,8 +159,11 @@ export class PassStructure {
       throw new ReferenceError(
         `Pass style is undefined, set the pass style before accessing pass structure fields`,
       );
+    //@ts-ignore
     if (!(this.fields[style].backFields instanceof FieldsMap))
+      //@ts-ignore
       this.fields[style].backFields = new FieldsMap();
+    //@ts-ignore
     return this.fields[style].backFields;
   }
   get primaryFields(): FieldsMap {
@@ -159,8 +172,11 @@ export class PassStructure {
       throw new ReferenceError(
         `Pass style is undefined, set the pass style before accessing pass structure fields`,
       );
+    //@ts-ignore
     if (!(this.fields[style].primaryFields instanceof FieldsMap))
+      //@ts-ignore
       this.fields[style].primaryFields = new FieldsMap();
+    //@ts-ignore
     return this.fields[style].primaryFields;
   }
   get secondaryFields(): FieldsMap {
@@ -169,8 +185,11 @@ export class PassStructure {
       throw new ReferenceError(
         `Pass style is undefined, set the pass style before accessing pass structure fields`,
       );
+    //@ts-ignore
     if (!(this.fields[style].secondaryFields instanceof FieldsMap))
+      //@ts-ignore
       this.fields[style].secondaryFields = new FieldsMap();
+    //@ts-ignore
     return this.fields[style].secondaryFields;
   }
 }

@@ -1,10 +1,10 @@
-import { ApplePass, Options } from '../interfaces';
 import { BARCODES_FORMAT, STRUCTURE_FIELDS } from '../constants';
+import { ApplePass, Options } from '../interfaces';
 
-import { PassColor } from './pass-color';
+import { getGeoPoint } from './get-geo-point';
 import { PassImages } from './images';
 import { Localizations } from './localizations';
-import { getGeoPoint } from './get-geo-point';
+import { PassColor } from './pass-color';
 import { PassStructure } from './pass-structure';
 import { getW3CDateString, isValidW3CDateString } from './w3cdate';
 
@@ -28,6 +28,7 @@ export class PassBase extends PassStructure {
     // restore via setters
     for (const [key, value] of Object.entries(fields)) {
       if (!STRUCTURE_FIELDS_SET.has(key) && key in this) {
+        // @ts-ignore
         this[key] = value;
       }
     }
@@ -43,6 +44,7 @@ export class PassBase extends PassStructure {
   toJSON(): Partial<ApplePass> {
     const res: Partial<ApplePass> = { formatVersion: 1 };
     for (const [field, value] of Object.entries(this.fields)) {
+      // @ts-ignore
       res[field] = value instanceof Date ? getW3CDateString(value) : value;
     }
     return res;
