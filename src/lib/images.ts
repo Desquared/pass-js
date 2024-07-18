@@ -8,7 +8,7 @@ import { promisify } from 'util';
 import * as path from 'path';
 import { createReadStream, promises as fs } from 'fs';
 
-import * as imagesize from 'imagesize';
+import imagesize from 'imagesize';
 
 import { IMAGES, DENSITIES } from '../constants';
 
@@ -20,9 +20,15 @@ interface ImageSizeResult {
   height: number;
 }
 
-const imageSize: (
-  v: import('stream').Readable,
-) => Promise<ImageSizeResult> = promisify(imagesize);
+const imageSize = (v: import('stream').Readable): Promise<ImageSizeResult> => {
+  return new Promise((resolve, reject) => {
+    imagesize(v, (err: Error | null, result: ImageSizeResult | undefined) => {
+      if (err) reject(err);
+      else if (result) resolve(result);
+      else reject(new Error('No result from imagesize'));
+    });
+  });
+};
 
 export type ImageDensity = '1x' | '2x' | '3x';
 export type ImageType =
