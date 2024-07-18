@@ -1,5 +1,5 @@
 {
-  "name": "pass-js",
+  "name": "@desquared/pass-js",
   "description": "Apple Wallet Pass generating and pushing updates from Node.js",
   "author": "Konstantin Vyatkin <tino@vtkn.io>",
   "version": "6.9.11",
@@ -40,7 +40,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/walletpass/pass-js.git"
+    "url": "https://github.com/Desquared/pass-js"
   },
   "dependencies": {
     "buffer-crc32": "0.2.13",
