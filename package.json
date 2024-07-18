@@ -2,7 +2,7 @@
   "name": "@desquared/pass-js",
   "description": "Apple Wallet Pass generating and pushing updates from Node.js",
   "author": "Konstantin Vyatkin <tino@vtkn.io>",
-  "version": "6.9.16",
+  "version": "6.9.17",
   "license": "MIT",
   "licenses": [
     {
@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "buffer-crc32": "0.2.13",
-    "color-name": "2.0.0",
+    "color-name": "1.1.4",
     "do-not-zip": "1.0.0",
     "event-iterator": "2.0.0",
     "imagesize": "1.0.0",

@@ -1,4 +1,4 @@
-import colorNames from 'color-name';
+import * as colorNames from 'color-name';
 
 const ABBR_RE = /^#([\da-f])([\da-f])([\da-f])([\da-f])?$/i;
 const HEX_RE = /^#([\da-f]{2})([\da-f]{2})([\da-f]{2})([\da-f]{2})?$/i;
@@ -19,8 +19,7 @@ function getRgb(colorString: string): [number, number, number] {
   // short paths
   const string = colorString.trim();
   // @ts-ignore
-  if (string in colorNames) return (colorNames as Record<string, [number, number, number]>)[string];
-
+  if (string in colorNames) return colorNames[string];
   if (/transparent/i.test(string)) return [0, 0, 0];
 
   // we don't need to recheck values because they are enforced by regexes
